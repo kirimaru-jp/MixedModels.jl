@@ -199,7 +199,10 @@ Function evaluations:     57
 Final parameter vector:   [0.9292213288149662, 0.018168393450877257, 0.22264486671069741]
 Final objective value:    1751.9393444647023
 Return code:              FTOL_REACHED
-</code></pre><h2 id="A-blocked-Cholesky-factor-1"><a class="docs-heading-anchor" href="#A-blocked-Cholesky-factor-1">A blocked Cholesky factor</a><a class="docs-heading-anchor-permalink" href="#A-blocked-Cholesky-factor-1" title="Permalink"></a></h2><p>A <code>LinearMixedModel</code> object contains two blocked matrices; a symmetric matrix <code>A</code> (only the lower triangle is stored) and a lower-triangular <code>L</code> which is the lower Cholesky factor of the updated and inflated <code>A</code>.</p><div class="admonition is-warning"><header class="admonition-header">Missing docstring.</header><div class="admonition-body"><p>Missing docstring for <code>describeblocks</code>. Check Documenter&#39;s build log for details.</p></div></div><p>shows the structure of the blocks</p><pre><code class="language-julia">describeblocks(fm2)</code></pre><pre><code class="language-none">rows:     subj         fixed
+</code></pre><h2 id="A-blocked-Cholesky-factor-1"><a class="docs-heading-anchor" href="#A-blocked-Cholesky-factor-1">A blocked Cholesky factor</a><a class="docs-heading-anchor-permalink" href="#A-blocked-Cholesky-factor-1" title="Permalink"></a></h2><p>A <code>LinearMixedModel</code> object contains two blocked matrices; a symmetric matrix <code>A</code> (only the lower triangle is stored) and a lower-triangular <code>L</code> which is the lower Cholesky factor of the updated and inflated <code>A</code>.</p><div class="admonition is-warning"><header class="admonition-header">Missing docstring.</header><div class="admonition-body"><p>Missing docstring for <code>describeblocks</code>. Check Documenter&#39;s build log for details.</p></div></div><p>shows the structure of the blocks</p><pre><code class="language-julia">describeblocks(fm2)</code></pre><pre><code class="language-none">┌ Warning: `describeblocks(m)` is deprecated, use `show(stdout, BlockDescription(m))` instead.
+│   caller = top-level scope at make.jl:5
+└ @ Core ~/work/MixedModels.jl/MixedModels.jl/docs/make.jl:5
+rows:     subj         fixed
   36:   BlkDiag
    2:    Dense         Dense</code></pre><p>The operation of installing a new value of the variance parameters, <code>θ</code>, and updating <code>L</code></p><article class="docstring"><header><a class="docstring-binding" id="MixedModels.setθ!" href="#MixedModels.setθ!"><code>MixedModels.setθ!</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">setθ!(m::LinearMixedModel, v)</code></pre><p>Install <code>v</code> as the θ parameters in <code>m</code>.</p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaStats/MixedModels.jl/blob/edf464a2693c6c42e4fe0b935dd101fd4fce0005/src/linearmixedmodel.jl#L755-L759">source</a></section><section><div><pre><code class="language-none">setθ!(bsamp::MixedModelsBootstrap, i::Integer)</code></pre><p>Install the values of the i&#39;th θ value of <code>bsamp.bstr</code> in <code>bsamp.λ</code></p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaStats/MixedModels.jl/blob/edf464a2693c6c42e4fe0b935dd101fd4fce0005/src/bootstrap.jl#L189-L193">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="MixedModels.updateL!" href="#MixedModels.updateL!"><code>MixedModels.updateL!</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">updateL!(m::LinearMixedModel)</code></pre><p>Update the blocked lower Cholesky factor, <code>m.L</code>, from <code>m.A</code> and <code>m.reterms</code> (used for λ only)</p><p>This is the crucial step in evaluating the objective, given a new parameter value.</p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaStats/MixedModels.jl/blob/edf464a2693c6c42e4fe0b935dd101fd4fce0005/src/linearmixedmodel.jl#L909-L915">source</a></section></article><p>is the central step in evaluating the objective (negative twice the log-likelihood).</p><p>Typically, the (1,1) block is the largest block in <code>A</code> and <code>L</code> and it has a special form, either <code>Diagonal</code> or</p><article class="docstring"><header><a class="docstring-binding" id="MixedModels.UniformBlockDiagonal" href="#MixedModels.UniformBlockDiagonal"><code>MixedModels.UniformBlockDiagonal</code></a> — <span class="docstring-category">Type</span></header><section><div><pre><code class="language-julia">UniformBlockDiagonal{T}</code></pre><p>Homogeneous block diagonal matrices.  <code>k</code> diagonal blocks each of size <code>m×m</code></p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaStats/MixedModels.jl/blob/edf464a2693c6c42e4fe0b935dd101fd4fce0005/src/arraytypes.jl#L1-L5">source</a></section></article><p>providing a compact representation and fast matrix multiplication or solutions of linear systems of equations.</p><h3 id="Modifying-the-optimization-process-1"><a class="docs-heading-anchor" href="#Modifying-the-optimization-process-1">Modifying the optimization process</a><a class="docs-heading-anchor-permalink" href="#Modifying-the-optimization-process-1" title="Permalink"></a></h3><p>The <code>OptSummary</code> object contains both input and output fields for the optimizer. To modify the optimization process the input fields can be changed after constructing the model but before fitting it.</p><p>Suppose, for example, that the user wishes to try a <a href="https://en.wikipedia.org/wiki/Nelder%E2%80%93Mead_method">Nelder-Mead</a> optimization method instead of the default <a href="https://en.wikipedia.org/wiki/BOBYQA"><code>BOBYQA</code></a> (Bounded Optimization BY Quadratic Approximation) method.</p><pre><code class="language-julia">fm2 = LinearMixedModel(@formula(reaction ~ 1+days+(1+days|subj)), sleepstudy);
 fm2.optsum.optimizer = :LN_NELDERMEAD;
@@ -247,16 +250,16 @@ typeof(mdl)</code></pre><pre><code class="language-none">GeneralizedLinearMixedM
  -0.7766556048305915</code></pre><p>and the starting estimate for <span>$\theta$</span>, which is a vector of the two standard deviations of the random effects, is chosen to be</p><pre><code class="language-julia">mdl.θ</code></pre><pre><code class="language-none">2-element Array{Float64,1}:
  1.0
  1.0</code></pre><p>The Laplace approximation to the deviance requires determining the conditional modes of the random effects. These are the values that maximize the conditional density of the random effects, given the model parameters and the data. This is done using Penalized Iteratively Reweighted Least Squares (PIRLS). In most cases PIRLS is fast and stable. It is simply a penalized version of the IRLS algorithm used in fitting GLMs.</p><p>The distinction between the &quot;fast&quot; and &quot;slow&quot; algorithms in the <code>MixedModels</code> package (<code>nAGQ=0</code> or <code>nAGQ=1</code> in <code>lme4</code>) is whether the fixed-effects parameters, <span>$\beta$</span>, are optimized in PIRLS or in the nonlinear optimizer. In a call to the <code>pirls!</code> function the first argument is a <code>GeneralizedLinearMixedModel</code>, which is modified during the function call. (By convention, the names of such <em>mutating functions</em> end in <code>!</code> as a warning to the user that they can modify an argument, usually the first argument.) The second and third arguments are optional logical values indicating if <span>$\beta$</span> is to be varied and if verbose output is to be printed.</p><pre><code class="language-julia">pirls!(mdl, true, true)</code></pre><pre><code class="language-none"></code></pre><pre><code class="language-julia">deviance(mdl)</code></pre><pre><code class="language-none">8201.848559060621</code></pre><pre><code class="language-julia">mdl.β</code></pre><pre><code class="language-none">6-element Array{Float64,1}:
-  0.21853493716530062
-  0.0514385425808118
-  0.29022454166300926
- -0.9791237061900837
- -1.9540167628140603
- -0.9794925718038128</code></pre><pre><code class="language-julia">mdl.θ # current values of the standard deviations of the random effects</code></pre><pre><code class="language-none">2-element Array{Float64,1}:
+  0.21853493716518077
+  0.051438542580813075
+  0.29022454166301104
+ -0.9791237061899788
+ -1.9540167628139933
+ -0.9794925718037505</code></pre><pre><code class="language-julia">mdl.θ # current values of the standard deviations of the random effects</code></pre><pre><code class="language-none">2-element Array{Float64,1}:
  1.0
  1.0</code></pre><p>If the optimization with respect to <span>$\beta$</span> is performed within PIRLS then the nonlinear optimization of the Laplace approximation to the deviance requires optimization with respect to <span>$\theta$</span> only. This is the &quot;fast&quot; algorithm. Given a value of <span>$\theta$</span>, PIRLS is used to determine the conditional estimate of <span>$\beta$</span> and the conditional mode of the random effects, <strong>b</strong>.</p><pre><code class="language-julia">mdl.b # conditional modes of b</code></pre><pre><code class="language-none">2-element Array{Array{Float64,2},1}:
- [-0.6007716038488813 -1.9322680866219608 … -0.14455373975336086 -0.5752238433557011]
- [-0.186364187479147 0.02142277358591889 … 0.6410383402098495 0.6496779078972685]</code></pre><pre><code class="language-julia">fit!(mdl, fast=true, verbose=true);</code></pre><pre><code class="language-none">Generalized Linear Mixed Model fit by maximum likelihood (nAGQ = 1)
+ [-0.6007716038488816 -1.9322680866219535 … -0.1445537397533624 -0.5752238433556919]
+ [-0.1863641874790554 0.021422773585907467 … 0.6410383402098135 0.6496779078972986]</code></pre><pre><code class="language-julia">fit!(mdl, fast=true, verbose=true);</code></pre><pre><code class="language-none">Generalized Linear Mixed Model fit by maximum likelihood (nAGQ = 1)
   r2 ~ 1 + anger + gender + btype + situ + (1 | subj) + (1 | item)
   Distribution: Bernoulli{Float64}
   Link: LogitLink()
@@ -281,7 +284,7 @@ btype: scold  -1.0165      0.257531   -3.95    &lt;1e-4
 btype: shout  -2.0218      0.259235   -7.80    &lt;1e-14
 situ: self    -1.01344     0.210888   -4.81    &lt;1e-5
 ─────────────────────────────────────────────────────</code></pre><p>The optimization process is summarized by</p><pre><code class="language-julia">mdl.LMM.optsum</code></pre><pre><code class="language-none">Initial parameter vector: [1.0, 1.0]
-Initial objective value:  8201.848559060623
+Initial objective value:  8201.848559060621
 
 Optimizer (from NLopt):   LN_BOBYQA
 Lower bounds:             [0.0, 0.0]
@@ -293,7 +296,7 @@ initial_step:             [0.75, 0.75]
 maxfeval:                 -1
 
 Function evaluations:     37
-Final parameter vector:   [1.3395638999819355, 0.4968327838779424]
+Final parameter vector:   [1.3395638999526496, 0.49683278386160784]
 Final objective value:    8151.583340131868
 Return code:              FTOL_REACHED
 </code></pre><p>As one would hope, given the name of the option, this fit is comparatively fast.</p><pre><code class="language-julia">@time(fit!(GeneralizedLinearMixedModel(vaform,
@@ -326,12 +329,12 @@ situ: self    -1.01344     0.210888   -4.81    &lt;1e-5
   Distribution: Bernoulli{Float64}
   Link: LogitLink()
 
-  Deviance: 8151.3998
+  Deviance: 8151.3997
 
 Variance components:
         Column   Variance Std.Dev. 
-subj (Intercept)  1.794613 1.339632
-item (Intercept)  0.245449 0.495428
+subj (Intercept)  1.794756 1.339685
+item (Intercept)  0.245339 0.495317
 
  Number of obs: 7584; levels of grouping factors: 316, 24
 
@@ -339,12 +342,12 @@ Fixed-effects parameters:
 ─────────────────────────────────────────────────────
                    Coef.  Std. Error      z  Pr(&gt;|z|)
 ─────────────────────────────────────────────────────
-(Intercept)    0.196356    0.405189    0.48    0.6280
-anger          0.0575173   0.0167565   3.43    0.0006
-gender: M      0.320012    0.191249    1.67    0.0943
-btype: scold  -1.05841     0.256865   -4.12    &lt;1e-4
-btype: shout  -2.10487     0.258588   -8.14    &lt;1e-15
-situ: self    -1.0549      0.210351   -5.01    &lt;1e-6
+(Intercept)    0.199048     0.405176   0.49    0.6232
+anger          0.0574288    0.016757   3.43    0.0006
+gender: M      0.32052      0.191255   1.68    0.0938
+btype: scold  -1.05871      0.256811  -4.12    &lt;1e-4
+btype: shout  -2.1053       0.258535  -8.14    &lt;1e-15
+situ: self    -1.05546      0.210307  -5.02    &lt;1e-6
 ─────────────────────────────────────────────────────</code></pre><p>This fit provided slightly better results (Laplace approximation to the deviance of 8151.400 versus 8151.583) but took 6 times as long. That is not terribly important when the times involved are a few seconds but can be important when the fit requires many hours or days of computing time.</p><p>The comparison of the slow and fast fit is available in the optimization summary after the slow fit.</p><pre><code class="language-julia">mdl1.LMM.optsum</code></pre><pre><code class="language-none">Initial parameter vector: [0.20605302210322762, 0.03994037605114987, 0.23131667674984463, -0.7941857249205363, -1.539188208545692, -0.7766556048305915, 1.0, 1.0]
 Initial objective value:  8204.421187737946
 
@@ -357,8 +360,8 @@ xtol_abs:                 [1.0e-10, 1.0e-10]
 initial_step:             [0.20605302210322762, 0.03994037605114987, 0.23131667674984463, -0.7941857249205363, -1.539188208545692, -0.7766556048305915, 0.75, 0.75]
 maxfeval:                 -1
 
-Function evaluations:     189
-Final parameter vector:   [0.19635557107837365, 0.057517338209830494, 0.32001152464297944, -1.0584107036614154, -2.104874576521896, -1.054903247634627, 1.3396317644150295, 0.49542801509332207]
-Final objective value:    8151.399793078269
+Function evaluations:     248
+Final parameter vector:   [0.19904822207586315, 0.057428770864252535, 0.3205199998689325, -1.0587075406423634, -2.105295370831641, -1.0554615769888562, 1.3396851449110554, 0.4953173427755419]
+Final objective value:    8151.39972105967
 Return code:              FTOL_REACHED
-</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../constructors/">« Model constructors</a><a class="docs-footer-nextpage" href="../GaussHermite/">Normalized Gauss-Hermite Quadrature »</a></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Monday 14 September 2020 13:15">Monday 14 September 2020</span>. Using Julia version 1.5.1.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../constructors/">« Model constructors</a><a class="docs-footer-nextpage" href="../GaussHermite/">Normalized Gauss-Hermite Quadrature »</a></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Monday 14 September 2020 13:19">Monday 14 September 2020</span>. Using Julia version 1.4.2.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
