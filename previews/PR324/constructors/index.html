@@ -22,15 +22,15 @@ Residual              2451.25 49.5101
 ────────────────────────────────────────────────</code></pre><p>(If you are new to Julia you may find that this first fit takes an unexpectedly long time, due to Just-In-Time (JIT) compilation of the code. The subsequent calls to such functions are much faster.)</p><pre><code class="language-julia">using BenchmarkTools
 dyestuff2 = MixedModels.dataset(:dyestuff2)
 @benchmark fit(MixedModel, $fm, $dyestuff2)</code></pre><pre><code class="language-none">BenchmarkTools.Trial: 
-  memory estimate:  82.74 KiB
-  allocs estimate:  1507
+  memory estimate:  65.38 KiB
+  allocs estimate:  1301
   --------------
-  minimum time:     512.592 μs (0.00% GC)
-  median time:      613.491 μs (0.00% GC)
-  mean time:        670.730 μs (5.36% GC)
-  maximum time:     36.372 ms (95.11% GC)
+  minimum time:     565.832 μs (0.00% GC)
+  median time:      580.133 μs (0.00% GC)
+  mean time:        631.001 μs (4.31% GC)
+  maximum time:     33.299 ms (94.86% GC)
   --------------
-  samples:          7427
+  samples:          7820
   evals/sample:     1</code></pre><p>By default, the model fit is by maximum likelihood. To use the <code>REML</code> criterion instead, add the optional named argument <code>REML=true</code> to the call to <code>fit</code></p><pre><code class="language-julia">fm1reml = fit(MixedModel, fm, dyestuff, REML=true)</code></pre><pre><code class="language-none">Linear mixed model fit by REML
  yield ~ 1 + (1 | batch)
  REML criterion at convergence: 319.6542768422538
@@ -211,72 +211,72 @@ days          10.4673     1.51931   6.89    &lt;1e-11
     contrasts = Dict(:days =&gt; DummyCoding()))</code></pre><pre><code class="language-none">Linear mixed model fit by maximum likelihood
  reaction ~ 1 + days + (1 + days | subj)
    logLik   -2 logLik     AIC        BIC    
-  -805.3993  1610.7985  1742.7985  1953.5337
+  -805.3992  1610.7984  1742.7984  1953.5336
 
 Variance components:
-            Column   Variance Std.Dev.   Corr.
-subj     (Intercept)   956.168 30.92197
-         days: 1       497.043 22.29447 -0.30
-         days: 2       915.860 30.26318 -0.57 +0.75
-         days: 3      1267.148 35.59702 -0.37 +0.72 +0.87
-         days: 4      1484.709 38.53193 -0.32 +0.58 +0.67 +0.91
-         days: 5      2296.949 47.92650 -0.25 +0.46 +0.45 +0.70 +0.85
-         days: 6      3849.414 62.04364 -0.28 +0.30 +0.48 +0.70 +0.77 +0.75
-         days: 7      1805.201 42.48766 -0.16 +0.22 +0.47 +0.50 +0.63 +0.64 +0.71
-         days: 8      3153.680 56.15763 -0.20 +0.29 +0.36 +0.56 +0.73 +0.90 +0.73 +0.74
-         days: 9      3075.290 55.45530 +0.05 +0.25 +0.16 +0.38 +0.59 +0.78 +0.38 +0.53 +0.85
-Residual                19.246  4.38702
+            Column    Variance Std.Dev.   Corr.
+subj     (Intercept)   955.5783 30.91243
+         days: 1       497.1836 22.29761 -0.30
+         days: 2       915.6458 30.25964 -0.57 +0.75
+         days: 3      1267.2267 35.59813 -0.37 +0.72 +0.87
+         days: 4      1484.9091 38.53452 -0.31 +0.59 +0.67 +0.91
+         days: 5      2296.0385 47.91700 -0.25 +0.46 +0.45 +0.70 +0.85
+         days: 6      3850.6723 62.05379 -0.28 +0.30 +0.48 +0.70 +0.77 +0.75
+         days: 7      1806.2626 42.50015 -0.16 +0.22 +0.47 +0.50 +0.63 +0.64 +0.71
+         days: 8      3151.7929 56.14083 -0.20 +0.29 +0.36 +0.56 +0.73 +0.90 +0.73 +0.74
+         days: 9      3075.7674 55.45960 +0.06 +0.25 +0.16 +0.38 +0.59 +0.78 +0.38 +0.53 +0.85
+Residual                19.2612  4.38876
  Number of obs: 180; levels of grouping factors: 18
 
   Fixed-effects parameters:
 ───────────────────────────────────────────────────
                  Coef.  Std. Error      z  Pr(&gt;|z|)
 ───────────────────────────────────────────────────
-(Intercept)  256.652       7.36136  34.86    &lt;1e-99
-days: 1        7.84395     5.45454   1.44    0.1504
-days: 2        8.71009     7.28145   1.20    0.2316
-days: 3       26.3402      8.51678   3.09    0.0020
-days: 4       31.9976      9.19904   3.48    0.0005
-days: 5       51.8666     11.3906    4.55    &lt;1e-5
-days: 6       55.5264     14.6968    3.78    0.0002
-days: 7       62.0988     10.1206    6.14    &lt;1e-9
-days: 8       79.9777     13.317     6.01    &lt;1e-8
-days: 9       94.1994     13.1525    7.16    &lt;1e-12
+(Intercept)  256.652       7.3592   34.87    &lt;1e-99
+days: 1        7.84395     5.45541   1.44    0.1505
+days: 2        8.71009     7.28075   1.20    0.2316
+days: 3       26.3402      8.51714   3.09    0.0020
+days: 4       31.9976      9.19973   3.48    0.0005
+days: 5       51.8667     11.3885    4.55    &lt;1e-5
+days: 6       55.5265     14.6992    3.78    0.0002
+days: 7       62.0988     10.1236    6.13    &lt;1e-9
+days: 8       79.9777     13.3131    6.01    &lt;1e-8
+days: 9       94.1994     13.1536    7.16    &lt;1e-12
 ───────────────────────────────────────────────────</code></pre><p>Separating the <code>1</code> and <code>days</code> random effects into separate terms removes the correlations between the intercept and the levels of <code>days</code>, but not between the levels themselves:</p><pre><code class="language-julia">fit(MixedModel, @formula(reaction ~ 1 + days + (1|subj) + (0 + days|subj)), sleepstudy,
     contrasts = Dict(:days =&gt; DummyCoding()))</code></pre><pre><code class="language-none">Linear mixed model fit by maximum likelihood
  reaction ~ 1 + days + (1 | subj) + (0 + days | subj)
    logLik   -2 logLik     AIC        BIC    
-  -827.7748  1655.5496  1769.5496  1951.5482
+  -827.7748  1655.5497  1769.5497  1951.5482
 
 Variance components:
             Column   Variance Std.Dev.  Corr.
-subj     (Intercept)   789.816 28.1037
+subj     (Intercept)   789.896 28.1051
          days: 1         0.000  0.0000   .  
-         days: 2       357.675 18.9123   .     NaN
-         days: 3       684.575 26.1644   .     NaN +0.81
-         days: 4       949.515 30.8142   .     NaN +0.57 +0.91
-         days: 5      1752.002 41.8569   .     NaN +0.26 +0.66 +0.87
-         days: 6      3355.666 57.9281   .     NaN +0.45 +0.72 +0.80 +0.76
-         days: 7      1538.914 39.2290   .     NaN +0.39 +0.42 +0.59 +0.62 +0.71
-         days: 8      2736.293 52.3096   .     NaN +0.22 +0.52 +0.75 +0.93 +0.72 +0.75
-         days: 9      2768.233 52.6140   .     NaN -0.05 +0.28 +0.57 +0.80 +0.34 +0.52 +0.87
-Residual               135.018 11.6197
+         days: 2       357.711 18.9132   .     NaN
+         days: 3       684.509 26.1631   .     NaN +0.81
+         days: 4       949.400 30.8123   .     NaN +0.57 +0.91
+         days: 5      1751.372 41.8494   .     NaN +0.26 +0.66 +0.87
+         days: 6      3356.164 57.9324   .     NaN +0.45 +0.72 +0.80 +0.76
+         days: 7      1538.658 39.2257   .     NaN +0.39 +0.42 +0.59 +0.62 +0.71
+         days: 8      2735.006 52.2973   .     NaN +0.22 +0.52 +0.75 +0.93 +0.72 +0.75
+         days: 9      2766.694 52.5994   .     NaN -0.05 +0.28 +0.57 +0.80 +0.34 +0.52 +0.87
+Residual               135.020 11.6198
  Number of obs: 180; levels of grouping factors: 18
 
   Fixed-effects parameters:
 ───────────────────────────────────────────────────
                  Coef.  Std. Error      z  Pr(&gt;|z|)
 ───────────────────────────────────────────────────
-(Intercept)  256.652       7.16796  35.81    &lt;1e-99
-days: 1        7.84395     3.87324   2.03    0.0429
-days: 2        8.71009     5.90532   1.47    0.1402
-days: 3       26.3402      7.28244   3.62    0.0003
-days: 4       31.9976      8.23121   3.89    0.0001
-days: 5       51.8667     10.5988    4.89    &lt;1e-6
-days: 6       55.5265     14.1925    3.91    &lt;1e-4
-days: 7       62.0988     10.0248    6.19    &lt;1e-9
-days: 8       79.9777     12.9236    6.19    &lt;1e-9
-days: 9       94.1994     12.992     7.25    &lt;1e-12
+(Intercept)  256.652       7.16828  35.80    &lt;1e-99
+days: 1        7.84395     3.87326   2.03    0.0429
+days: 2        8.71009     5.9055    1.47    0.1402
+days: 3       26.3402      7.2822    3.62    0.0003
+days: 4       31.9976      8.23083   3.89    0.0001
+days: 5       51.8666     10.5972    4.89    &lt;1e-6
+days: 6       55.5264     14.1935    3.91    &lt;1e-4
+days: 7       62.0988     10.0241    6.19    &lt;1e-9
+days: 8       79.9777     12.9208    6.19    &lt;1e-9
+days: 9       94.1994     12.9887    7.25    &lt;1e-12
 ───────────────────────────────────────────────────</code></pre><p>But using <code>zerocorr</code> on the individual terms (or <code>zerocorr!</code> on the constructed model object as above) does remove the correlations between the levels:</p><pre><code class="language-julia">fit(MixedModel, @formula(reaction ~ 1 + days + zerocorr(1 + days|subj)), sleepstudy,
     contrasts = Dict(:days =&gt; DummyCoding()))
 fit(MixedModel, @formula(reaction ~ 1 + days + (1|subj) + zerocorr(0 + days|subj)), sleepstudy,
@@ -325,33 +325,33 @@ gm1 = fit(MixedModel, verbaggform, verbagg, Bernoulli())</code></pre><pre><code 
 
 Variance components:
         Column   Variance Std.Dev. 
-subj (Intercept)  1.793491 1.339213
-item (Intercept)  0.117144 0.342263
+subj (Intercept)  1.793517 1.339222
+item (Intercept)  0.117146 0.342266
 
  Number of obs: 7584; levels of grouping factors: 316, 24
 
 Fixed-effects parameters:
-──────────────────────────────────────────────────────
-                   Coef.  Std. Error       z  Pr(&gt;|z|)
-──────────────────────────────────────────────────────
-(Intercept)   -0.152398    0.385221    -0.40    0.6924
-anger          0.0573742   0.0167528    3.42    0.0006
-gender: M      0.320709    0.191207     1.68    0.0935
-btype: scold  -1.05997     0.184155    -5.76    &lt;1e-8
-btype: shout  -2.10397     0.186514   -11.28    &lt;1e-28
-situ: self    -1.05441     0.151191    -6.97    &lt;1e-11
-mode: want     0.706953    0.151004     4.68    &lt;1e-5
-──────────────────────────────────────────────────────</code></pre><p>The canonical link, which is <code>LogitLink</code> for the <code>Bernoulli</code> distribution, is used if no explicit link is specified.</p><p>Note that, in keeping with convention in the <a href="https://github.com/JuliaStats/GLM.jl"><code>GLM</code> package</a>, the distribution family for a binary (i.e. 0/1) response is the <code>Bernoulli</code> distribution. The <code>Binomial</code> distribution is only used when the response is the fraction of trials returning a positive, in which case the number of trials must be specified as the case weights.</p><h3 id="Optional-arguments-to-fit!-1"><a class="docs-heading-anchor" href="#Optional-arguments-to-fit!-1">Optional arguments to fit!</a><a class="docs-heading-anchor-permalink" href="#Optional-arguments-to-fit!-1" title="Permalink"></a></h3><p>An alternative approach is to create the <code>GeneralizedLinearMixedModel</code> object then call <code>fit!</code> on it. In this form optional arguments <code>fast</code> and/or <code>nAGQ</code> can be passed to the optimization process.</p><p>As the name implies, <code>fast=true</code>, provides a faster but somewhat less accurate fit. These fits may suffice for model comparisons.</p><pre><code class="language-julia">gm1a = fit(MixedModel, verbaggform, verbagg, Bernoulli(), fast = true)
+─────────────────────────────────────────────────────
+                  Coef.  Std. Error       z  Pr(&gt;|z|)
+─────────────────────────────────────────────────────
+(Intercept)   -0.153567   0.385223    -0.40    0.6902
+anger          0.057418   0.0167529    3.43    0.0006
+gender: M      0.320805   0.191209     1.68    0.0934
+btype: scold  -1.05981    0.184156    -5.75    &lt;1e-8
+btype: shout  -2.10385    0.186515   -11.28    &lt;1e-28
+situ: self    -1.05431    0.151192    -6.97    &lt;1e-11
+mode: want     0.707044   0.151005     4.68    &lt;1e-5
+─────────────────────────────────────────────────────</code></pre><p>The canonical link, which is <code>LogitLink</code> for the <code>Bernoulli</code> distribution, is used if no explicit link is specified.</p><p>Note that, in keeping with convention in the <a href="https://github.com/JuliaStats/GLM.jl"><code>GLM</code> package</a>, the distribution family for a binary (i.e. 0/1) response is the <code>Bernoulli</code> distribution. The <code>Binomial</code> distribution is only used when the response is the fraction of trials returning a positive, in which case the number of trials must be specified as the case weights.</p><h3 id="Optional-arguments-to-fit!-1"><a class="docs-heading-anchor" href="#Optional-arguments-to-fit!-1">Optional arguments to fit!</a><a class="docs-heading-anchor-permalink" href="#Optional-arguments-to-fit!-1" title="Permalink"></a></h3><p>An alternative approach is to create the <code>GeneralizedLinearMixedModel</code> object then call <code>fit!</code> on it. In this form optional arguments <code>fast</code> and/or <code>nAGQ</code> can be passed to the optimization process.</p><p>As the name implies, <code>fast=true</code>, provides a faster but somewhat less accurate fit. These fits may suffice for model comparisons.</p><pre><code class="language-julia">gm1a = fit(MixedModel, verbaggform, verbagg, Bernoulli(), fast = true)
 deviance(gm1a) - deviance(gm1)
 @benchmark fit(MixedModel, $verbaggform, $verbagg, Bernoulli())
 @benchmark fit(MixedModel, $verbaggform, $verbagg, Bernoulli(), fast = true)</code></pre><pre><code class="language-none">BenchmarkTools.Trial: 
-  memory estimate:  13.24 MiB
-  allocs estimate:  98738
+  memory estimate:  11.78 MiB
+  allocs estimate:  88231
   --------------
-  minimum time:     471.459 ms (0.00% GC)
-  median time:      484.449 ms (0.00% GC)
-  mean time:        484.525 ms (0.29% GC)
-  maximum time:     500.119 ms (3.05% GC)
+  minimum time:     460.279 ms (0.00% GC)
+  median time:      464.281 ms (0.00% GC)
+  mean time:        464.859 ms (0.00% GC)
+  maximum time:     471.180 ms (0.00% GC)
   --------------
   samples:          11
   evals/sample:     1</code></pre><p>The optional argument <code>nAGQ=k</code> causes evaluation of the deviance function to use a <code>k</code> point adaptive Gauss-Hermite quadrature rule. This method only applies to models with a single, simple, scalar random-effects term, such as</p><pre><code class="language-julia">contraception = MixedModels.dataset(:contra)
@@ -370,36 +370,36 @@ sort(deviances)</code></pre><pre><code class="language-none">OrderedCollections.
   :default   =&gt; 2372.73
   :fast      =&gt; 2372.78
   :nAGQ      =&gt; 2372.46
-  :nAGQ_fast =&gt; 2372.51</code></pre><h1 id="Extractor-functions-1"><a class="docs-heading-anchor" href="#Extractor-functions-1">Extractor functions</a><a class="docs-heading-anchor-permalink" href="#Extractor-functions-1" title="Permalink"></a></h1><p><code>LinearMixedModel</code> and <code>GeneralizedLinearMixedModel</code> are subtypes of <code>StatsBase.RegressionModel</code> which, in turn, is a subtype of <code>StatsBase.StatisticalModel</code>. Many of the generic extractors defined in the <code>StatsBase</code> package have methods for these models.</p><h2 id="Model-fit-statistics-1"><a class="docs-heading-anchor" href="#Model-fit-statistics-1">Model-fit statistics</a><a class="docs-heading-anchor-permalink" href="#Model-fit-statistics-1" title="Permalink"></a></h2><p>The statistics describing the quality of the model fit include</p><article class="docstring"><header><a class="docstring-binding" id="StatsBase.loglikelihood-Tuple{StatisticalModel}" href="#StatsBase.loglikelihood-Tuple{StatisticalModel}"><code>StatsBase.loglikelihood</code></a> — <span class="docstring-category">Method</span></header><section><div><pre><code class="language-julia">loglikelihood(obj::StatisticalModel)</code></pre><p>Return the log-likelihood of the model.</p></div></section></article><article class="docstring"><header><a class="docstring-binding" id="StatsBase.aic" href="#StatsBase.aic"><code>StatsBase.aic</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">aic(obj::StatisticalModel)</code></pre><p>Akaike&#39;s Information Criterion, defined as <span>$-2 \log L + 2k$</span>, with <span>$L$</span> the likelihood of the model, and <code>k</code> its number of consumed degrees of freedom (as returned by <a href="#StatsBase.dof-Tuple{StatisticalModel}"><code>dof</code></a>).</p></div></section></article><article class="docstring"><header><a class="docstring-binding" id="StatsBase.bic" href="#StatsBase.bic"><code>StatsBase.bic</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">bic(obj::StatisticalModel)</code></pre><p>Bayesian Information Criterion, defined as <span>$-2 \log L + k \log n$</span>, with <span>$L$</span> the likelihood of the model,  <span>$k$</span> its number of consumed degrees of freedom (as returned by <a href="#StatsBase.dof-Tuple{StatisticalModel}"><code>dof</code></a>), and <span>$n$</span> the number of observations (as returned by <a href="#StatsBase.nobs-Tuple{StatisticalModel}"><code>nobs</code></a>).</p></div></section></article><article class="docstring"><header><a class="docstring-binding" id="StatsBase.dof-Tuple{StatisticalModel}" href="#StatsBase.dof-Tuple{StatisticalModel}"><code>StatsBase.dof</code></a> — <span class="docstring-category">Method</span></header><section><div><pre><code class="language-julia">dof(obj::StatisticalModel)</code></pre><p>Return the number of degrees of freedom consumed in the model, including when applicable the intercept and the distribution&#39;s dispersion parameter.</p></div></section></article><article class="docstring"><header><a class="docstring-binding" id="StatsBase.nobs-Tuple{StatisticalModel}" href="#StatsBase.nobs-Tuple{StatisticalModel}"><code>StatsBase.nobs</code></a> — <span class="docstring-category">Method</span></header><section><div><pre><code class="language-julia">nobs(obj::StatisticalModel)</code></pre><p>Return the number of independent observations on which the model was fitted. Be careful when using this information, as the definition of an independent observation may vary depending on the model, on the format used to pass the data, on the sampling plan (if specified), etc.</p></div></section></article><pre><code class="language-julia">loglikelihood(fm1)</code></pre><pre><code class="language-none">-163.66352994057004</code></pre><pre><code class="language-julia">aic(fm1)</code></pre><pre><code class="language-none">333.3270598811401</code></pre><pre><code class="language-julia">bic(fm1)</code></pre><pre><code class="language-none">337.5306520261266</code></pre><pre><code class="language-julia">dof(fm1)   # 1 fixed effect, 2 variances</code></pre><pre><code class="language-none">3</code></pre><pre><code class="language-julia">nobs(fm1)  # 30 observations</code></pre><pre><code class="language-none">30</code></pre><pre><code class="language-julia">loglikelihood(gm1)</code></pre><pre><code class="language-none">-4067.9164326900777</code></pre><p>In general the <a href="https://en.wikipedia.org/wiki/Deviance_(statistics)"><code>deviance</code></a> of a statistical model fit is negative twice the log-likelihood adjusting for the saturated model.</p><article class="docstring"><header><a class="docstring-binding" id="StatsBase.deviance-Tuple{StatisticalModel}" href="#StatsBase.deviance-Tuple{StatisticalModel}"><code>StatsBase.deviance</code></a> — <span class="docstring-category">Method</span></header><section><div><pre><code class="language-julia">deviance(obj::StatisticalModel)</code></pre><p>Return the deviance of the model relative to a reference, which is usually when applicable the saturated model. It is equal, <em>up to a constant</em>, to <span>$-2 \log L$</span>, with <span>$L$</span> the likelihood of the model.</p></div></section></article><p>Because it is not clear what the saturated model corresponding to a particular <code>LinearMixedModel</code> should be, negative twice the log-likelihood is called the <code>objective</code>.</p><article class="docstring"><header><a class="docstring-binding" id="MixedModels.objective" href="#MixedModels.objective"><code>MixedModels.objective</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">objective(m::LinearMixedModel)</code></pre><p>Return negative twice the log-likelihood of model <code>m</code></p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaStats/MixedModels.jl/blob/22610115c6ee460a2b4e6ce64ce8c5b2abe0ae34/src/linearmixedmodel.jl#L557-L561">source</a></section></article><p>This value is also accessible as the <code>deviance</code> but the user should bear in mind that this doesn&#39;t have all the properties of a deviance which is corrected for the saturated model. For example, it is not necessarily non-negative.</p><pre><code class="language-julia">objective(fm1)</code></pre><pre><code class="language-none">327.3270598811401</code></pre><pre><code class="language-julia">deviance(fm1)</code></pre><pre><code class="language-none">327.3270598811401</code></pre><p>The value optimized when fitting a <code>GeneralizedLinearMixedModel</code> is the Laplace approximation to the deviance or an adaptive Gauss-Hermite evaluation.</p><article class="docstring"><header><a class="docstring-binding" id="MixedModels.deviance!" href="#MixedModels.deviance!"><code>MixedModels.deviance!</code></a> — <span class="docstring-category">Function</span></header><section><div><p>deviance!(m::GeneralizedLinearMixedModel, nAGQ=1)</p><p>Update <code>m.η</code>, <code>m.μ</code>, etc., install the working response and working weights in <code>m.LMM</code>, update <code>m.LMM.A</code> and <code>m.LMM.R</code>, then evaluate the <a href="#StatsBase.deviance-Tuple{StatisticalModel}"><code>deviance</code></a>.</p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaStats/MixedModels.jl/blob/22610115c6ee460a2b4e6ce64ce8c5b2abe0ae34/src/generalizedlinearmixedmodel.jl#L111-L116">source</a></section></article><pre><code class="language-julia">MixedModels.deviance!(gm1)</code></pre><pre><code class="language-none">8135.832865380157</code></pre><h2 id="Fixed-effects-parameter-estimates-1"><a class="docs-heading-anchor" href="#Fixed-effects-parameter-estimates-1">Fixed-effects parameter estimates</a><a class="docs-heading-anchor-permalink" href="#Fixed-effects-parameter-estimates-1" title="Permalink"></a></h2><p>The <code>coef</code> and <code>fixef</code> extractors both return the maximum likelihood estimates of the fixed-effects coefficients.</p><article class="docstring"><header><a class="docstring-binding" id="StatsBase.coef" href="#StatsBase.coef"><code>StatsBase.coef</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">coef(obj::StatisticalModel)</code></pre><p>Return the coefficients of the model.</p></div></section></article><article class="docstring"><header><a class="docstring-binding" id="MixedModels.fixef" href="#MixedModels.fixef"><code>MixedModels.fixef</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">fixef(m::MixedModel)</code></pre><p>Return the fixed-effects parameter vector estimate of <code>m</code>.</p><p>In the rank-deficient case the truncated parameter vector, of length <code>rank(m)</code> is returned. This is unlike <code>coef</code> which always returns a vector whose length matches the number of columns in <code>X</code>.</p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaStats/MixedModels.jl/blob/22610115c6ee460a2b4e6ce64ce8c5b2abe0ae34/src/linearmixedmodel.jl#L394-L402">source</a></section></article><pre><code class="language-julia">coef(fm1)</code></pre><pre><code class="language-none">1-element Array{Float64,1}:
+  :nAGQ_fast =&gt; 2372.51</code></pre><h1 id="Extractor-functions-1"><a class="docs-heading-anchor" href="#Extractor-functions-1">Extractor functions</a><a class="docs-heading-anchor-permalink" href="#Extractor-functions-1" title="Permalink"></a></h1><p><code>LinearMixedModel</code> and <code>GeneralizedLinearMixedModel</code> are subtypes of <code>StatsBase.RegressionModel</code> which, in turn, is a subtype of <code>StatsBase.StatisticalModel</code>. Many of the generic extractors defined in the <code>StatsBase</code> package have methods for these models.</p><h2 id="Model-fit-statistics-1"><a class="docs-heading-anchor" href="#Model-fit-statistics-1">Model-fit statistics</a><a class="docs-heading-anchor-permalink" href="#Model-fit-statistics-1" title="Permalink"></a></h2><p>The statistics describing the quality of the model fit include</p><article class="docstring"><header><a class="docstring-binding" id="StatsBase.loglikelihood-Tuple{StatisticalModel}" href="#StatsBase.loglikelihood-Tuple{StatisticalModel}"><code>StatsBase.loglikelihood</code></a> — <span class="docstring-category">Method</span></header><section><div><pre><code class="language-julia">loglikelihood(obj::StatisticalModel)</code></pre><p>Return the log-likelihood of the model.</p></div></section></article><article class="docstring"><header><a class="docstring-binding" id="StatsBase.aic" href="#StatsBase.aic"><code>StatsBase.aic</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">aic(obj::StatisticalModel)</code></pre><p>Akaike&#39;s Information Criterion, defined as <span>$-2 \log L + 2k$</span>, with <span>$L$</span> the likelihood of the model, and <code>k</code> its number of consumed degrees of freedom (as returned by <a href="#StatsBase.dof-Tuple{StatisticalModel}"><code>dof</code></a>).</p></div></section></article><article class="docstring"><header><a class="docstring-binding" id="StatsBase.bic" href="#StatsBase.bic"><code>StatsBase.bic</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">bic(obj::StatisticalModel)</code></pre><p>Bayesian Information Criterion, defined as <span>$-2 \log L + k \log n$</span>, with <span>$L$</span> the likelihood of the model,  <span>$k$</span> its number of consumed degrees of freedom (as returned by <a href="#StatsBase.dof-Tuple{StatisticalModel}"><code>dof</code></a>), and <span>$n$</span> the number of observations (as returned by <a href="#StatsBase.nobs-Tuple{StatisticalModel}"><code>nobs</code></a>).</p></div></section></article><article class="docstring"><header><a class="docstring-binding" id="StatsBase.dof-Tuple{StatisticalModel}" href="#StatsBase.dof-Tuple{StatisticalModel}"><code>StatsBase.dof</code></a> — <span class="docstring-category">Method</span></header><section><div><pre><code class="language-julia">dof(obj::StatisticalModel)</code></pre><p>Return the number of degrees of freedom consumed in the model, including when applicable the intercept and the distribution&#39;s dispersion parameter.</p></div></section></article><article class="docstring"><header><a class="docstring-binding" id="StatsBase.nobs-Tuple{StatisticalModel}" href="#StatsBase.nobs-Tuple{StatisticalModel}"><code>StatsBase.nobs</code></a> — <span class="docstring-category">Method</span></header><section><div><pre><code class="language-julia">nobs(obj::StatisticalModel)</code></pre><p>Return the number of independent observations on which the model was fitted. Be careful when using this information, as the definition of an independent observation may vary depending on the model, on the format used to pass the data, on the sampling plan (if specified), etc.</p></div></section></article><pre><code class="language-julia">loglikelihood(fm1)</code></pre><pre><code class="language-none">-163.66352994057004</code></pre><pre><code class="language-julia">aic(fm1)</code></pre><pre><code class="language-none">333.3270598811401</code></pre><pre><code class="language-julia">bic(fm1)</code></pre><pre><code class="language-none">337.5306520261266</code></pre><pre><code class="language-julia">dof(fm1)   # 1 fixed effect, 2 variances</code></pre><pre><code class="language-none">3</code></pre><pre><code class="language-julia">nobs(fm1)  # 30 observations</code></pre><pre><code class="language-none">30</code></pre><pre><code class="language-julia">loglikelihood(gm1)</code></pre><pre><code class="language-none">-4067.916427885257</code></pre><p>In general the <a href="https://en.wikipedia.org/wiki/Deviance_(statistics)"><code>deviance</code></a> of a statistical model fit is negative twice the log-likelihood adjusting for the saturated model.</p><article class="docstring"><header><a class="docstring-binding" id="StatsBase.deviance-Tuple{StatisticalModel}" href="#StatsBase.deviance-Tuple{StatisticalModel}"><code>StatsBase.deviance</code></a> — <span class="docstring-category">Method</span></header><section><div><pre><code class="language-julia">deviance(obj::StatisticalModel)</code></pre><p>Return the deviance of the model relative to a reference, which is usually when applicable the saturated model. It is equal, <em>up to a constant</em>, to <span>$-2 \log L$</span>, with <span>$L$</span> the likelihood of the model.</p></div></section></article><p>Because it is not clear what the saturated model corresponding to a particular <code>LinearMixedModel</code> should be, negative twice the log-likelihood is called the <code>objective</code>.</p><article class="docstring"><header><a class="docstring-binding" id="MixedModels.objective" href="#MixedModels.objective"><code>MixedModels.objective</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">objective(m::LinearMixedModel)</code></pre><p>Return negative twice the log-likelihood of model <code>m</code></p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaStats/MixedModels.jl/blob/22610115c6ee460a2b4e6ce64ce8c5b2abe0ae34/src/linearmixedmodel.jl#L557-L561">source</a></section></article><p>This value is also accessible as the <code>deviance</code> but the user should bear in mind that this doesn&#39;t have all the properties of a deviance which is corrected for the saturated model. For example, it is not necessarily non-negative.</p><pre><code class="language-julia">objective(fm1)</code></pre><pre><code class="language-none">327.3270598811401</code></pre><pre><code class="language-julia">deviance(fm1)</code></pre><pre><code class="language-none">327.3270598811401</code></pre><p>The value optimized when fitting a <code>GeneralizedLinearMixedModel</code> is the Laplace approximation to the deviance or an adaptive Gauss-Hermite evaluation.</p><article class="docstring"><header><a class="docstring-binding" id="MixedModels.deviance!" href="#MixedModels.deviance!"><code>MixedModels.deviance!</code></a> — <span class="docstring-category">Function</span></header><section><div><p>deviance!(m::GeneralizedLinearMixedModel, nAGQ=1)</p><p>Update <code>m.η</code>, <code>m.μ</code>, etc., install the working response and working weights in <code>m.LMM</code>, update <code>m.LMM.A</code> and <code>m.LMM.R</code>, then evaluate the <a href="#StatsBase.deviance-Tuple{StatisticalModel}"><code>deviance</code></a>.</p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaStats/MixedModels.jl/blob/22610115c6ee460a2b4e6ce64ce8c5b2abe0ae34/src/generalizedlinearmixedmodel.jl#L111-L116">source</a></section></article><pre><code class="language-julia">MixedModels.deviance!(gm1)</code></pre><pre><code class="language-none">8135.832855770498</code></pre><h2 id="Fixed-effects-parameter-estimates-1"><a class="docs-heading-anchor" href="#Fixed-effects-parameter-estimates-1">Fixed-effects parameter estimates</a><a class="docs-heading-anchor-permalink" href="#Fixed-effects-parameter-estimates-1" title="Permalink"></a></h2><p>The <code>coef</code> and <code>fixef</code> extractors both return the maximum likelihood estimates of the fixed-effects coefficients.</p><article class="docstring"><header><a class="docstring-binding" id="StatsBase.coef" href="#StatsBase.coef"><code>StatsBase.coef</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">coef(obj::StatisticalModel)</code></pre><p>Return the coefficients of the model.</p></div></section></article><article class="docstring"><header><a class="docstring-binding" id="MixedModels.fixef" href="#MixedModels.fixef"><code>MixedModels.fixef</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">fixef(m::MixedModel)</code></pre><p>Return the fixed-effects parameter vector estimate of <code>m</code>.</p><p>In the rank-deficient case the truncated parameter vector, of length <code>rank(m)</code> is returned. This is unlike <code>coef</code> which always returns a vector whose length matches the number of columns in <code>X</code>.</p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaStats/MixedModels.jl/blob/22610115c6ee460a2b4e6ce64ce8c5b2abe0ae34/src/linearmixedmodel.jl#L394-L402">source</a></section></article><pre><code class="language-julia">coef(fm1)</code></pre><pre><code class="language-none">1-element Array{Float64,1}:
  1527.4999999999993</code></pre><pre><code class="language-julia">fixef(fm1)</code></pre><pre><code class="language-none">1-element Array{Float64,1}:
  1527.4999999999993</code></pre><p>An alternative extractor for the fixed-effects coefficient is the <code>β</code> property. Properties whose names are Greek letters usually have an alternative spelling, which is the name of the Greek letter.</p><pre><code class="language-julia">fm1.β</code></pre><pre><code class="language-none">1-element Array{Float64,1}:
  1527.4999999999993</code></pre><pre><code class="language-julia">fm1.beta</code></pre><pre><code class="language-none">1-element Array{Float64,1}:
  1527.4999999999993</code></pre><pre><code class="language-julia">gm1.β</code></pre><pre><code class="language-none">7-element Array{Float64,1}:
- -0.1523977256227043
-  0.05737421207532868
-  0.32070932290346477
- -1.0599665740537318
- -2.10396846124879
- -1.0544086096302647
-  0.7069525640029861</code></pre><p>A full list of property names is returned by <code>propertynames</code></p><pre><code class="language-julia">propertynames(fm1)</code></pre><pre><code class="language-none">(:formula, :sqrtwts, :A, :L, :optsum, :θ, :theta, :β, :beta, :λ, :lambda, :stderror, :σ, :sigma, :σs, :sigmas, :b, :u, :lowerbd, :X, :y, :corr, :vcov, :PCA, :rePCA, :reterms, :feterms, :allterms, :objective, :pvalues)</code></pre><pre><code class="language-julia">propertynames(gm1)</code></pre><pre><code class="language-none">(:A, :L, :theta, :beta, :coef, :λ, :lambda, :σ, :sigma, :X, :y, :lowerbd, :σρs, :σs, :corr, :vcov, :PCA, :rePCA, :LMM, :β, :β₀, :θ, :b, :u, :u₀, :resp, :η, :wt, :devc, :devc0, :sd, :mult)</code></pre><p>The variance-covariance matrix of the fixed-effects coefficients is returned by</p><article class="docstring"><header><a class="docstring-binding" id="StatsBase.vcov" href="#StatsBase.vcov"><code>StatsBase.vcov</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">vcov(obj::StatisticalModel)</code></pre><p>Return the variance-covariance matrix for the coefficients of the model.</p></div></section><section><div><pre><code class="language-none">vcov(m::LinearMixedModel)</code></pre><p>Returns the variance-covariance matrix of the fixed effects. If <code>corr=true</code>, then correlation of fixed effects is returned instead.</p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaStats/MixedModels.jl/blob/22610115c6ee460a2b4e6ce64ce8c5b2abe0ae34/src/mixedmodel.jl#L35-L40">source</a></section></article><pre><code class="language-julia">vcov(fm2)</code></pre><pre><code class="language-none">2×2 Array{Float64,2}:
+ -0.15356671709830064
+  0.05741797587984359
+  0.3208049356164706
+ -1.0598059609048842
+ -2.10384730549468
+ -1.0543067231721857
+  0.7070443232240456</code></pre><p>A full list of property names is returned by <code>propertynames</code></p><pre><code class="language-julia">propertynames(fm1)</code></pre><pre><code class="language-none">(:formula, :sqrtwts, :A, :L, :optsum, :θ, :theta, :β, :beta, :λ, :lambda, :stderror, :σ, :sigma, :σs, :sigmas, :b, :u, :lowerbd, :X, :y, :corr, :vcov, :PCA, :rePCA, :reterms, :feterms, :allterms, :objective, :pvalues)</code></pre><pre><code class="language-julia">propertynames(gm1)</code></pre><pre><code class="language-none">(:A, :L, :theta, :beta, :coef, :λ, :lambda, :σ, :sigma, :X, :y, :lowerbd, :σρs, :σs, :corr, :vcov, :PCA, :rePCA, :LMM, :β, :β₀, :θ, :b, :u, :u₀, :resp, :η, :wt, :devc, :devc0, :sd, :mult)</code></pre><p>The variance-covariance matrix of the fixed-effects coefficients is returned by</p><article class="docstring"><header><a class="docstring-binding" id="StatsBase.vcov" href="#StatsBase.vcov"><code>StatsBase.vcov</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">vcov(obj::StatisticalModel)</code></pre><p>Return the variance-covariance matrix for the coefficients of the model.</p></div></section><section><div><pre><code class="language-none">vcov(m::LinearMixedModel)</code></pre><p>Returns the variance-covariance matrix of the fixed effects. If <code>corr=true</code>, then correlation of fixed effects is returned instead.</p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaStats/MixedModels.jl/blob/22610115c6ee460a2b4e6ce64ce8c5b2abe0ae34/src/mixedmodel.jl#L35-L40">source</a></section></article><pre><code class="language-julia">vcov(fm2)</code></pre><pre><code class="language-none">2×2 Array{Float64,2}:
  43.9868   -1.37039
  -1.37039   2.25671</code></pre><pre><code class="language-julia">vcov(gm1)</code></pre><pre><code class="language-none">7×7 Array{Float64,2}:
-  0.148395    -0.00561488   -0.00982342   …  -0.0112068    -0.0113465
- -0.00561488   0.000280656   7.19116e-5      -1.47958e-5    1.02404e-5
- -0.00982342   7.19116e-5    0.0365602       -8.04406e-5    5.25857e-5
- -0.0167982   -1.43704e-5   -9.25619e-5       0.000265807  -0.000172098
- -0.0166222   -2.90541e-5   -0.000162387      0.00065897   -0.00052052
- -0.0112068   -1.47958e-5   -8.04406e-5   …   0.0228588    -0.000247781
- -0.0113465    1.02404e-5    5.25857e-5      -0.000247781   0.0228023</code></pre><p>The standard errors are the square roots of the diagonal elements of the estimated variance-covariance matrix of the fixed-effects coefficient estimators.</p><article class="docstring"><header><a class="docstring-binding" id="StatsBase.stderror" href="#StatsBase.stderror"><code>StatsBase.stderror</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">stderror(obj::StatisticalModel)</code></pre><p>Return the standard errors for the coefficients of the model.</p></div></section></article><pre><code class="language-julia">stderror(fm2)</code></pre><pre><code class="language-none">2-element Array{Float64,1}:
+  0.148397    -0.00561496  -0.00982357   …  -0.011207     -0.0113467
+ -0.00561496   0.00028066   7.19135e-5      -1.4797e-5     1.02416e-5
+ -0.00982357   7.19135e-5   0.0365607       -8.04428e-5    5.25891e-5
+ -0.0167984   -1.43715e-5  -9.25628e-5       0.000265798  -0.000172098
+ -0.0166224   -2.90567e-5  -0.000162392      0.000658961  -0.000520529
+ -0.011207    -1.4797e-5   -8.04428e-5   …   0.0228592    -0.000247783
+ -0.0113467    1.02416e-5   5.25891e-5      -0.000247783   0.0228026</code></pre><p>The standard errors are the square roots of the diagonal elements of the estimated variance-covariance matrix of the fixed-effects coefficient estimators.</p><article class="docstring"><header><a class="docstring-binding" id="StatsBase.stderror" href="#StatsBase.stderror"><code>StatsBase.stderror</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">stderror(obj::StatisticalModel)</code></pre><p>Return the standard errors for the coefficients of the model.</p></div></section></article><pre><code class="language-julia">stderror(fm2)</code></pre><pre><code class="language-none">2-element Array{Float64,1}:
  6.63225782531458
  1.502235453639816</code></pre><pre><code class="language-julia">stderror(gm1)</code></pre><pre><code class="language-none">7-element Array{Float64,1}:
- 0.385220577873009
- 0.016752780911796817
- 0.19120731965954565
- 0.18415504974307
- 0.18651379198884244
- 0.15119137664895105
- 0.15100429795258563</code></pre><p>Finally, the <code>coeftable</code> generic produces a table of coefficient estimates, their standard errors, and their ratio. The <em>p-values</em> quoted here should be regarded as approximations.</p><article class="docstring"><header><a class="docstring-binding" id="StatsBase.coeftable" href="#StatsBase.coeftable"><code>StatsBase.coeftable</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">coeftable(obj::StatisticalModel; level::Real=0.95)</code></pre><p>Return a table of class <code>CoefTable</code> with coefficients and related statistics. <code>level</code> determines the level for confidence intervals (by default, 95%).</p></div></section></article><pre><code class="language-julia">coeftable(fm2)</code></pre><pre><code class="language-none">──────────────────────────────────────────────────
+ 0.38522336213805447
+ 0.016752904768821596
+ 0.19120857132773006
+ 0.1841564136487027
+ 0.18651515655904125
+ 0.15119249928484846
+ 0.15100543578031236</code></pre><p>Finally, the <code>coeftable</code> generic produces a table of coefficient estimates, their standard errors, and their ratio. The <em>p-values</em> quoted here should be regarded as approximations.</p><article class="docstring"><header><a class="docstring-binding" id="StatsBase.coeftable" href="#StatsBase.coeftable"><code>StatsBase.coeftable</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">coeftable(obj::StatisticalModel; level::Real=0.95)</code></pre><p>Return a table of class <code>CoefTable</code> with coefficients and related statistics. <code>level</code> determines the level for confidence intervals (by default, 95%).</p></div></section></article><pre><code class="language-julia">coeftable(fm2)</code></pre><pre><code class="language-none">──────────────────────────────────────────────────
                 Coef.  Std. Error      z  Pr(&gt;|z|)
 ──────────────────────────────────────────────────
 (Intercept)  251.405      6.63226  37.91    &lt;1e-99
@@ -411,8 +411,8 @@ subj     (Intercept)  565.5107 23.78047
 Residual              654.9415 25.59182
 </code></pre><pre><code class="language-julia">VarCorr(gm1)</code></pre><pre><code class="language-none">Variance components:
         Column   Variance Std.Dev. 
-subj (Intercept)  1.793491 1.339213
-item (Intercept)  0.117144 0.342263
+subj (Intercept)  1.793517 1.339222
+item (Intercept)  0.117146 0.342266
 
 </code></pre><p>Individual components are returned by other extractors</p><article class="docstring"><header><a class="docstring-binding" id="MixedModels.varest" href="#MixedModels.varest"><code>MixedModels.varest</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">varest(m::LinearMixedModel)</code></pre><p>Returns the estimate of σ², the variance of the conditional distribution of Y given B.</p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaStats/MixedModels.jl/blob/22610115c6ee460a2b4e6ce64ce8c5b2abe0ae34/src/linearmixedmodel.jl#L952-L956">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="MixedModels.sdest" href="#MixedModels.sdest"><code>MixedModels.sdest</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">sdest(m::LinearMixedModel)</code></pre><p>Return the estimate of σ, the standard deviation of the per-observation noise.</p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaStats/MixedModels.jl/blob/22610115c6ee460a2b4e6ce64ce8c5b2abe0ae34/src/linearmixedmodel.jl#L748-L752">source</a></section></article><pre><code class="language-julia">varest(fm2)</code></pre><pre><code class="language-none">654.9414513956141</code></pre><pre><code class="language-julia">sdest(fm2)</code></pre><pre><code class="language-none">25.59182391693906</code></pre><pre><code class="language-julia">fm2.σ</code></pre><pre><code class="language-none">25.59182391693906</code></pre><h2 id="Conditional-modes-of-the-random-effects-1"><a class="docs-heading-anchor" href="#Conditional-modes-of-the-random-effects-1">Conditional modes of the random effects</a><a class="docs-heading-anchor-permalink" href="#Conditional-modes-of-the-random-effects-1" title="Permalink"></a></h2><p>The <code>ranef</code> extractor</p><article class="docstring"><header><a class="docstring-binding" id="MixedModels.ranef" href="#MixedModels.ranef"><code>MixedModels.ranef</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">ranef(m::LinearMixedModel; uscale=false, named=false)</code></pre><p>Return, as a <code>Vector{Vector{T}}</code> (<code>Vector{NamedVector{T}}</code> if <code>named=true</code>), the conditional modes of the random effects in model <code>m</code>.</p><p>If <code>uscale</code> is <code>true</code> the random effects are on the spherical (i.e. <code>u</code>) scale, otherwise on the original scale.</p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaStats/MixedModels.jl/blob/22610115c6ee460a2b4e6ce64ce8c5b2abe0ae34/src/linearmixedmodel.jl#L654-L662">source</a></section></article><pre><code class="language-julia">ranef(fm1)</code></pre><pre><code class="language-none">1-element Array{Array{Float64,2},1}:
  [-16.62822143006434 0.36951603177972425 … 53.57982460798641 -42.49434365460919]</code></pre><pre><code class="language-julia">fm1.b</code></pre><pre><code class="language-none">1-element Array{Array{Float64,2},1}:
@@ -498,4 +498,4 @@ Residual              0.302415 0.549923
                Coef.  Std. Error      z  Pr(&gt;|z|)
 ─────────────────────────────────────────────────
 (Intercept)  22.9722    0.808572  28.41    &lt;1e-99
-─────────────────────────────────────────────────</code></pre><pre><code class="language-julia">sum(leverage(fm4r))</code></pre><pre><code class="language-none">27.472361770234787</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../">« MixedModels.jl Documentation</a><a class="docs-footer-nextpage" href="../optimization/">Details of the parameter estimation »</a></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Monday 14 September 2020 14:44">Monday 14 September 2020</span>. Using Julia version 1.5.1.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+─────────────────────────────────────────────────</code></pre><pre><code class="language-julia">sum(leverage(fm4r))</code></pre><pre><code class="language-none">27.472361770234787</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../">« MixedModels.jl Documentation</a><a class="docs-footer-nextpage" href="../optimization/">Details of the parameter estimation »</a></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Monday 14 September 2020 14:44">Monday 14 September 2020</span>. Using Julia version 1.4.2.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
