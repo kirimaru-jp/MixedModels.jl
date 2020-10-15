@@ -22,15 +22,15 @@ Residual              2451.25 49.5101
 ────────────────────────────────────────────────</pre><p>(If you are new to Julia you may find that this first fit takes an unexpectedly long time, due to Just-In-Time (JIT) compilation of the code. The subsequent calls to such functions are much faster.)</p><pre><code class="language-julia">using BenchmarkTools
 dyestuff2 = MixedModels.dataset(:dyestuff2)
 @benchmark fit(MixedModel, $fm, $dyestuff2)</code></pre><pre class="documenter-example-output">BenchmarkTools.Trial: 
-  memory estimate:  81.41 KiB
-  allocs estimate:  1461
+  memory estimate:  80.37 KiB
+  allocs estimate:  1451
   --------------
-  minimum time:     471.820 μs (0.00% GC)
-  median time:      519.222 μs (0.00% GC)
-  mean time:        582.020 μs (5.28% GC)
-  maximum time:     28.786 ms (93.75% GC)
+  minimum time:     531.912 μs (0.00% GC)
+  median time:      609.814 μs (0.00% GC)
+  mean time:        653.542 μs (4.68% GC)
+  maximum time:     33.197 ms (94.48% GC)
   --------------
-  samples:          8557
+  samples:          7614
   evals/sample:     1</pre><p>By default, the model is fit by maximum likelihood. To use the <code>REML</code> criterion instead, add the optional named argument <code>REML=true</code> to the call to <code>fit</code></p><pre><code class="language-julia">fm1reml = fit(MixedModel, fm, dyestuff, REML=true)</code></pre><pre class="documenter-example-output">Linear mixed model fit by REML
  yield ~ 1 + (1 | batch)
  REML criterion at convergence: 319.6542768422538
@@ -426,13 +426,13 @@ mode: want     0.706953    0.151004     4.68    &lt;1e-5
 deviance(gm1a) - deviance(gm1)
 @benchmark fit(MixedModel, $verbaggform, $verbagg, Bernoulli())
 @benchmark fit(MixedModel, $verbaggform, $verbagg, Bernoulli(), fast = true)</code></pre><pre class="documenter-example-output">BenchmarkTools.Trial: 
-  memory estimate:  13.19 MiB
-  allocs estimate:  95080
+  memory estimate:  13.17 MiB
+  allocs estimate:  94920
   --------------
-  minimum time:     458.694 ms (0.00% GC)
-  median time:      476.786 ms (0.00% GC)
-  mean time:        474.773 ms (0.32% GC)
-  maximum time:     493.781 ms (0.00% GC)
+  minimum time:     469.560 ms (0.00% GC)
+  median time:      472.213 ms (0.00% GC)
+  mean time:        475.770 ms (0.29% GC)
+  maximum time:     488.984 ms (0.00% GC)
   --------------
   samples:          11
   evals/sample:     1</pre><p>The optional argument <code>nAGQ=k</code> causes evaluation of the deviance function to use a <code>k</code> point adaptive Gauss-Hermite quadrature rule. This method only applies to models with a single, simple, scalar random-effects term, such as</p><pre><code class="language-julia">contraception = MixedModels.dataset(:contra)
@@ -581,4 +581,4 @@ Residual              0.302415 0.549923
                Coef.  Std. Error      z  Pr(&gt;|z|)
 ─────────────────────────────────────────────────
 (Intercept)  22.9722    0.808572  28.41    &lt;1e-99
-─────────────────────────────────────────────────</pre><pre><code class="language-julia">sum(leverage(fm4r))</code></pre><pre class="documenter-example-output">27.472361770234787</pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../">« MixedModels.jl Documentation</a><a class="docs-footer-nextpage" href="../optimization/">Details of the parameter estimation »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Thursday 8 October 2020 20:51">Thursday 8 October 2020</span>. Using Julia version 1.5.2.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+─────────────────────────────────────────────────</pre><pre><code class="language-julia">sum(leverage(fm4r))</code></pre><pre class="documenter-example-output">27.472361770234787</pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../">« MixedModels.jl Documentation</a><a class="docs-footer-nextpage" href="../optimization/">Details of the parameter estimation »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Thursday 15 October 2020 18:19">Thursday 15 October 2020</span>. Using Julia version 1.5.2.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
