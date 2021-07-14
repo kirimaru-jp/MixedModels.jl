@@ -39,13 +39,13 @@ Residual              2451.2501 49.5101
 ────────────────────────────────────────────────</pre><p>(If you are new to Julia you may find that this first fit takes an unexpectedly long time, due to Just-In-Time (JIT) compilation of the code. The subsequent calls to such functions are much faster.)</p><pre><code class="language-julia">using BenchmarkTools
 dyestuff2 = MixedModels.dataset(:dyestuff2)
 @benchmark fit(MixedModel, $fm, $dyestuff2)</code></pre><pre class="documenter-example-output">BenchmarkTools.Trial: 
-  memory estimate:  48.94 KiB
-  allocs estimate:  896
+  memory estimate:  47.89 KiB
+  allocs estimate:  886
   --------------
-  minimum time:     122.102 μs (0.00% GC)
-  median time:      129.401 μs (0.00% GC)
-  mean time:        147.328 μs (9.88% GC)
-  maximum time:     40.324 ms (95.34% GC)
+  minimum time:     134.701 μs (0.00% GC)
+  median time:      144.751 μs (0.00% GC)
+  mean time:        167.258 μs (11.30% GC)
+  maximum time:     52.744 ms (94.70% GC)
   --------------
   samples:          10000
   evals/sample:     1</pre><p>By default, the model is fit by maximum likelihood. To use the <code>REML</code> criterion instead, add the optional named argument <code>REML=true</code> to the call to <code>fit</code></p><pre><code class="language-julia">fm1reml = fit(MixedModel, fm, dyestuff, REML=true)</code></pre><pre class="documenter-example-output">Linear mixed model fit by REML
@@ -459,23 +459,23 @@ situ: self    -1.05436     0.151195    -6.97    &lt;1e-11
 mode: want     0.706825    0.151008     4.68    &lt;1e-05
 ──────────────────────────────────────────────────────</pre><p>The canonical link, which is <code>LogitLink</code> for the <code>Bernoulli</code> distribution, is used if no explicit link is specified.</p><p>Note that, in keeping with convention in the <a href="https://github.com/JuliaStats/GLM.jl"><code>GLM</code> package</a>, the distribution family for a binary (i.e. 0/1) response is the <code>Bernoulli</code> distribution. The <code>Binomial</code> distribution is only used when the response is the fraction of trials returning a positive, in which case the number of trials must be specified as the case weights.</p><h3 id="Optional-arguments-to-fit"><a class="docs-heading-anchor" href="#Optional-arguments-to-fit">Optional arguments to fit</a><a id="Optional-arguments-to-fit-1"></a><a class="docs-heading-anchor-permalink" href="#Optional-arguments-to-fit" title="Permalink"></a></h3><p>An alternative approach is to create the <code>GeneralizedLinearMixedModel</code> object then call <code>fit!</code> on it. The optional arguments <code>fast</code> and/or <code>nAGQ</code> can be passed to the optimization process via both <code>fit</code> and <code>fit!</code> (i.e these optimization settings are not used nor recognized when constructing the model).</p><p>As the name implies, <code>fast=true</code>, provides a faster but somewhat less accurate fit. These fits may suffice for model comparisons.</p><pre><code class="language-julia">gm1a = fit(MixedModel, verbaggform, verbagg, Bernoulli(), fast = true)
 deviance(gm1a) - deviance(gm1)</code></pre><pre class="documenter-example-output">0.3380046506135841</pre><pre><code class="language-julia">@benchmark fit(MixedModel, $verbaggform, $verbagg, Bernoulli())</code></pre><pre class="documenter-example-output">BenchmarkTools.Trial: 
-  memory estimate:  20.53 MiB
-  allocs estimate:  342059
+  memory estimate:  20.54 MiB
+  allocs estimate:  342118
   --------------
-  minimum time:     2.864 s (0.00% GC)
-  median time:      2.879 s (0.00% GC)
-  mean time:        2.879 s (0.00% GC)
-  maximum time:     2.895 s (0.00% GC)
+  minimum time:     2.819 s (0.00% GC)
+  median time:      2.824 s (0.00% GC)
+  mean time:        2.824 s (0.00% GC)
+  maximum time:     2.829 s (0.00% GC)
   --------------
   samples:          2
   evals/sample:     1</pre><pre><code class="language-julia">@benchmark fit(MixedModel, $verbaggform, $verbagg, Bernoulli(), fast = true)</code></pre><pre class="documenter-example-output">BenchmarkTools.Trial: 
   memory estimate:  11.54 MiB
-  allocs estimate:  80817
+  allocs estimate:  80877
   --------------
-  minimum time:     248.783 ms (0.00% GC)
-  median time:      253.722 ms (0.00% GC)
-  mean time:        254.891 ms (0.28% GC)
-  maximum time:     269.456 ms (5.23% GC)
+  minimum time:     251.831 ms (0.00% GC)
+  median time:      253.284 ms (0.00% GC)
+  mean time:        254.536 ms (0.35% GC)
+  maximum time:     273.605 ms (6.50% GC)
   --------------
   samples:          20
   evals/sample:     1</pre><p>The optional argument <code>nAGQ=k</code> causes evaluation of the deviance function to use a <code>k</code> point adaptive Gauss-Hermite quadrature rule. This method only applies to models with a single, simple, scalar random-effects term, such as</p><pre><code class="language-julia">contraception = MixedModels.dataset(:contra)
