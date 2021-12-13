@@ -183,3 +183,92 @@ function sdcorr(A::AbstractMatrix{T}) where {T}
         end,
     )
 end
+
+
+"""
+    trankUpdate!(C::HermOrSym{T,S}, A::SparseMatrixCSC{T}, α, β)
+
+Rank-k update of `C` from `A` in the transposed format.  I.e. C := β*C + α*A'A
+
+Elements of `C` are modified by dot products of columns of `A` using `SparseArrays._spdot`
+"""
+function trankUpdate!(C::HermOrSym{T,S}, A::SparseMatrixCSC{T}, α, β) where {T,S}
+    A.n == size(C, 2) || throw(DimensionMismatch())
+    C.uplo == 'U' || throw(ArgumentError("C.uplo must be 'U'"))
+    Cd, cp, rv, nz = C.data, A.colptr, rowvals(A), nonzeros(A)
+    isone(β) || rmul!(UpperTriangular(Cd), β)
+    @inbounds Threads.@threads for j in 1:(A.n)
+        xj = Int(cp[j])
+        xj_last = Int(cp[j + 1] - 1)
+        for i in 1:(j - 1)
+            Cd[i, j] += α * SparseArrays._spdot(
+                *,
+                Int(cp[i]), Int(cp[i + 1] - 1), rv, nz,
+                xj, xj_last, rv, nz,
+            )
+        end
+        Cd[j,j] += α * sum(abs2, view(nz, xj:xj_last))
+    end
+    return C
+end
+
+function rowintersection(cp, rv, i, j)
+    T = eltype(cp)
+    xj = cp[i]
+    xj_up = cp[i + 1]
+    yj = cp[j]
+    yj_up = cp[j + 1]
+    v = NTuple{2, T}[]
+    while xj < xj_up && yj < yj_up
+        ix = rv[xj]
+        iy = rv[yj]
+        if ix == iy
+            push!(v, (xj, yj))
+            xj += 1
+            yj += 1
+        elseif ix < iy
+            xj += 1
+        else
+            yj += 1
+        end
+    end
+    return v
+end
+
+function rowints(A::SparseMatrixCSC)
+    cp, rv = A.colptr, A.rowval
+    T = eltype(cp)
+    vv = sizehint!(Vector{NTuple{2, T}}[], kchoose2(A.n))
+    for j in 2:A.n
+        for i in 1:(j - 1)
+            push!(vv, rowintersection(A.colptr, A.rowval, i, j))
+        end
+    end
+    return vv
+end
+
+function trankUpdate!(
+    C::HermOrSym,
+    A::SparseMatrixCSC{Tv,Ti},
+    ri::Vector{Vector{Tuple{Ti,Ti}}},
+    α,
+    β
+    ) where {Tv,Ti}
+    (; m, n, colptr, rowval, nzval) = A
+    (; data, uplo) = C
+    n == size(C, 2) || throw(DimensionMismatch())
+    isone(β) || rmul!(UpperTriangular(data), β)
+    riind = 0
+    for j in 1:n
+        for i in 1:(j - 1)
+            riind += 1
+            s = zero(Tv)
+            for (ix, iy) in ri[riind]
+                s += nzval[ix] * nzval[iy]
+            end
+            data[i,j] += α * s
+        end
+        data[j, j] += α * sum(abs2, view(nzval, nzrange(A, j)))
+    end
+    return C
+end
