@@ -17,8 +17,8 @@ In a linear mixed model the unconditional distribution of $\mathcal{B}$ and the 
 
 $\begin{aligned}
   (\mathcal{Y} | \mathcal{B}=\bf{b}) &\sim\mathcal{N}(\bf{ X\beta + Z b},\sigma^2\bf{I})\\\\
-  \mathcal{B}&\sim\mathcal{N}(\bf{0},\Sigma_\theta) .
-\end{aligned}$
+  \mathcal{B}&\sim\mathcal{N}(\bf{0},\Sigma_\theta)
+\end{aligned}$.
 
 The *conditional mean* of $\mathcal Y$, given $\mathcal B=\bf b$, is the *linear predictor*, $\bf X\bf\beta+\bf Z\bf b$, which depends on the $p$-dimensional *fixed-effects parameter*, $\bf \beta$, and on $\bf b$.
 The *model matrices*, $\bf X$ and $\bf Z$, of dimension $n\times p$ and $n\times q$, respectively, are determined from the formula for the model and the values of covariates.
@@ -50,7 +50,7 @@ where ${\bf I}_q$ is the $q\times q$ *identity matrix*.
 
 Negative twice the log-likelihood of the parameters, given the data, $\bf y$, is
 
-$d({\bf\theta},{\bf\beta},\sigma|{\bf y}) = n\log(2\pi\sigma^2)+\log(|{\bf L_\theta}|^2)+\frac{r^2_{\beta,\theta}}{\sigma^2}.$
+$d({\bf\theta},{\bf\beta},\sigma|{\bf y}) = n\log(2\pi\sigma^2)+\log(|{\bf L_\theta}|^2)+\frac{r^2_{\beta,\theta}}{\sigma^2}$
 
 where $|{\bf L_\theta}|$ denotes the *determinant* of ${\bf L_\theta}$.
 Because ${\bf L_\theta}$ is triangular, its determinant is the product of its diagonal elements.
@@ -83,7 +83,7 @@ The MLE of $\bf\theta$, written $\widehat{\bf\theta}$, is the value that minimiz
 We determine this value by numerical optimization.
 In the process of evaluating $\tilde{d}(\widehat{\theta}|{\bf y})$ 
 we determine $\widehat{\beta}=\widehat{\beta_{\widehat\theta}}$, 
-$\tilde{\bf u_{\widehat{\theta}}}$ and $r^2_{\widehat{\theta}}$, 
+$\tilde{\bf u}_{\widehat{\theta}}$ and $r^2_{\widehat{\theta}}$, 
 from which we can evaluate $\widehat{\sigma}=\sqrt{r^2_{\widehat{\theta}}/n}$.
 
 The elements of the conditional mode of $\mathcal B$, evaluated at the parameter estimates,
