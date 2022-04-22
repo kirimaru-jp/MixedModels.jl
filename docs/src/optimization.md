@@ -30,8 +30,7 @@ $\Sigma_\theta=\sigma^2\Lambda_\theta\Lambda_\theta'$
 
 The *spherical random effects*, $\mathcal{U}\sim\mathcal{N}(\bf{0},\sigma^2\bf{I}_q)$, determine $\mathcal B$ according to
 
-$\mathcal{B}=\Lambda_\theta\mathcal{U}.$
-
+$\mathcal{B}=\Lambda_\theta\mathcal{U}$.
 
 The *penalized residual sum of squares* (PRSS),
 
@@ -45,7 +44,7 @@ $r^2_{\beta,\theta} =\min_{\bf{u}}\left(\|\bf{y} -\bf{X}{\beta} -\bf{Z}\Lambda_\
 is a direct (i.e. non-iterative) computation.
 The particular method used to solve this generates a *blocked Choleksy factor*, $\bf{L}_\theta$, which is an lower triangular $q\times q$ matrix satisfying
 
-$\bf{L}_\theta\bf{L}_\theta'=\Lambda_\theta'\bf{Z}'\bf{Z}\Lambda_\theta+\bf{I}_q .$
+$\bf{L}_\theta \bf{L}_\theta' = \Lambda_\theta'\bf{Z}'\bf{Z}\Lambda_\theta+\bf{I}_q.$
 
 where ${\bf I}_q$ is the $q\times q$ *identity matrix*.
 
