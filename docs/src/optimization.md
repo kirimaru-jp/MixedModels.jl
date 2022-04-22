@@ -84,7 +84,7 @@ We determine this value by numerical optimization.
 In the process of evaluating $\tilde{d}(\widehat{\theta}|{\bf y})$ 
 we determine $\widehat{\beta}=\widehat{\beta_{\widehat\theta}}$, 
 
-$\tilde{\bf b_{\widehat{\theta}}} = \Lambda_{\widehat{\theta}} \tilde{\bf u}_{\widehat{\theta}}$ 
+$\tilde{\bf u}_{\widehat{\theta}}$ 
 
 and $r^2_{\widehat{\theta}}$, 
 from which we can evaluate $\widehat{\sigma}=\sqrt{r^2_{\widehat{\theta}}/n}$.
