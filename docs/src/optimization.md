@@ -65,7 +65,7 @@ is also a direct calculation.
 The values of $\bf u$ and $\bf\beta$ that provide this minimum are called, respectively, the *conditional mode*, $\tilde{\bf u_\theta}$, of the spherical random effects and the conditional estimate, $\widehat{\bf\beta_\theta}$, of the fixed effects.
 At the conditional estimate of the fixed effects the objective is
 
-$d({\bf\theta},\widehat{\bf\beta_\theta},\sigma|{\bf y})
+$d({\bf\theta},\widehat{\beta_\theta},\sigma|{\bf y})
 =n\log(2\pi\sigma^2)+\log(|{\bf L}(\theta)|^2)+\frac{r^2_\theta}{\sigma^2}.$
 
 Minimizing this expression with respect to $\sigma^2$ produces the conditional estimate
@@ -74,8 +74,8 @@ $\widehat{\sigma}^2_\theta = \frac{r^2_\theta}{n}$
 
 which provides the *profiled log-likelihood* on the deviance scale as
 
-$\tilde{d}(\theta|{\bf y})=d(\theta,\widehat{\beta}_\theta,\widehat{\sigma}_\theta|{\bf y})
-=\log(|{\bf L}_\theta|^2)+n\left[1+\log\left(\frac{2\pi r^2_\theta}{n}\right)\right],$
+$\tilde{d}(\theta|{\bf y})=d(\theta,\widehat{\beta_\theta},\widehat{\sigma_\theta}|{\bf y})
+=\log(|{\bf L_\theta}|^2)+n\left[1+\log\left(\frac{2\pi r^2_\theta}{n}\right)\right],$
 
 a function of $\bf\theta$ alone.
 
