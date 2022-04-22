@@ -81,7 +81,10 @@ a function of $\bf\theta$ alone.
 
 The MLE of $\bf\theta$, written $\widehat{\bf\theta}$, is the value that minimizes this profiled objective.
 We determine this value by numerical optimization.
-In the process of evaluating $\tilde{d}(\widehat{\theta}|{\bf y})$ we determine $\widehat{\beta}=\widehat{\beta}_{\widehat\theta}$, $\tilde{\bf u}_{\widehat{\theta}}$ and $r^2_{\widehat{\theta}}$, from which we can evaluate $\widehat{\sigma}=\sqrt{r^2_{\widehat{\theta}}/n}$.
+In the process of evaluating $\tilde{d}(\widehat{\theta}|{\bf y})$ 
+we determine $\widehat{\beta}=\widehat{\beta_{\widehat\theta}}$, 
+$\tilde{\bf u}_{\widehat{\theta}}$ and $r^2_{\widehat{\theta}}$, 
+from which we can evaluate $\widehat{\sigma}=\sqrt{r^2_{\widehat{\theta}}/n}$.
 
 The elements of the conditional mode of $\mathcal B$, evaluated at the parameter estimates,
 ```math
