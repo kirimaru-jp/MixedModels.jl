@@ -73,10 +73,10 @@ Minimizing this expression with respect to $\sigma^2$ produces the conditional e
 $\widehat{\sigma}^2_\theta = \frac{r^2_\theta}{n}$
 
 which provides the *profiled log-likelihood* on the deviance scale as
-```math
-\tilde{d}(\theta|{\bf y})=d(\theta,\widehat{\beta}_\theta,\widehat{\sigma}_\theta|{\bf y})
-=\log(|{\bf L}_\theta|^2)+n\left[1+\log\left(\frac{2\pi r^2_\theta}{n}\right)\right],
-```
+
+$\tilde{d}(\theta|{\bf y})=d(\theta,\widehat{\beta}_\theta,\widehat{\sigma}_\theta|{\bf y})
+=\log(|{\bf L}_\theta|^2)+n\left[1+\log\left(\frac{2\pi r^2_\theta}{n}\right)\right],$
+
 a function of $\bf\theta$ alone.
 
 The MLE of $\bf\theta$, written $\widehat{\bf\theta}$, is the value that minimizes this profiled objective.
