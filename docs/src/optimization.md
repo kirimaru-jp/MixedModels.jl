@@ -42,7 +42,7 @@ Minimizing $r^2$ with respect to $\bf u$,
 $r^2_{\beta,\theta} =\min_{\bf{u}}\left(\|\bf{y} -\bf{X}{\beta} -\bf{Z}\Lambda_\theta\bf{u}\|^2+\|\bf{u}\|^2\right)$
 
 is a direct (i.e. non-iterative) computation.
-The particular method used to solve this generates a *blocked Choleksy factor*, $\bf{L}_\theta$, which is an lower triangular $q\times q$ matrix satisfying
+The particular method used to solve this generates a *blocked Choleksy factor*, $\bf{L}_\theta$ (or $\bf{L}(\theta)$), which is an lower triangular $q\times q$ matrix satisfying
 
 $\bf{L}_\theta {\bf L}^\prime$
 
