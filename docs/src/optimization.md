@@ -44,16 +44,16 @@ $r^2_{\beta,\theta} =\min_{\bf{u}}\left(\|\bf{y} -\bf{X}{\beta} -\bf{Z}\Lambda_\
 is a direct (i.e. non-iterative) computation.
 The particular method used to solve this generates a *blocked Choleksy factor*, $\bf{L}_\theta$ (or $\bf{L}(\theta)$), which is an lower triangular $q\times q$ matrix satisfying
 
-$\bf{L}_\theta \bf{L}(\theta)^\prime = \Lambda(\theta)'\bf{Z}'\bf{Z}\Lambda(\theta) + \bf{I}_q.$
+$\bf{L}_\theta {\bf L_\theta}^\prime = \Lambda(\theta)'\bf{Z}'\bf{Z}\Lambda(\theta) + \bf{I}_q.$
 
 where ${\bf I}_q$ is the $q\times q$ *identity matrix*.
 
 Negative twice the log-likelihood of the parameters, given the data, $\bf y$, is
 
-$d({\bf\theta},{\bf\beta},\sigma|{\bf y}) = n\log(2\pi\sigma^2)+\log(|\bf{L}(\theta)|^2)+\frac{r^2_{\beta,\theta}}{\sigma^2}.$
+$d({\bf\theta},{\bf\beta},\sigma|{\bf y}) = n\log(2\pi\sigma^2)+\log(|{\bf L_\theta}|^2)+\frac{r^2_{\beta,\theta}}{\sigma^2}.$
 
-where $|\bf{L}(\theta)|$ denotes the *determinant* of $\bf{L}(\theta)$.
-Because $\bf{L}(\theta)$ is triangular, its determinant is the product of its diagonal elements.
+where $|{\bf L_\theta}|$ denotes the *determinant* of ${\bf L_\theta}$.
+Because ${\bf L_\theta}$ is triangular, its determinant is the product of its diagonal elements.
 
 Because the conditional mean, $\bf\mu_{\mathcal Y|\mathcal B=\bf b}=\bf
 X\bf\beta+\bf Z\Lambda_\theta\bf u$, is a linear function of both $\bf\beta$ and $\bf u$, 
@@ -284,12 +284,12 @@ The unconstrained components of $\eta$ are mapped to the, possiby constrained, c
 For historical reasons, the inverse of this function, taking components of $\mu$ to the corresponding component of $\eta$ is called the *link function* and the more frequently used map from $\eta$ to $\mu$ is the *inverse link*.
 
 A *generalized linear mixed-effects model* (GLMM) is defined, for the purposes of this package, by
-```math
-\begin{aligned}
+
+$\begin{aligned}
   (\mathcal{Y} | \mathcal{B}=\bf{b}) &\sim\mathcal{D}(\bf{g^{-1}(X\beta + Z b)},\phi)\\\\
   \mathcal{B}&\sim\mathcal{N}(\bf{0},\Sigma_\theta) .
-\end{aligned}
-```
+\end{aligned}$
+
 where $\mathcal{D}$ indicates the distribution family parameterized by the mean and, when needed, a common scale parameter, $\phi$.
 (There is no scale parameter for `Bernoulli` or for `Poisson`.
 Specifying the mean completely determines the distribution.)
