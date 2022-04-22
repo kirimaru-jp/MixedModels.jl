@@ -288,7 +288,7 @@ A *generalized linear mixed-effects model* (GLMM) is defined, for the purposes o
 
 $\begin{aligned}
   (\mathcal{Y} | \mathcal{B}=\bf{b}) &\sim\mathcal{D}(\bf{g^{-1}(X\beta + Z b)},\phi)\\\\
-  \mathcal{B}&\sim\mathcal{N}(\bf{0},\Sigma_\theta) .
+  \mathcal{B}&\sim\mathcal{N}(\bf{0},\Sigma_\theta)
 \end{aligned}$
 
 where $\mathcal{D}$ indicates the distribution family parameterized by the mean and, when needed, a common scale parameter, $\phi$.
