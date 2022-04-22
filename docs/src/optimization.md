@@ -62,7 +62,7 @@ minimization of the PRSS with respect to both $\bf\beta$ and $\bf u$ to produce
 $r^2_\theta =\min_{{\bf\beta},{\bf u}}\left(\|{\bf y} -{\bf X}{\bf\beta} -{\bf Z}\Lambda_\theta{\bf u}\|^2+\|{\bf u}\|^2\right)$
 
 is also a direct calculation.
-The values of $\bf u$ and $\bf\beta$ that provide this minimum are called, respectively, the *conditional mode*, $\tilde\bf u$, of the spherical random effects and the conditional estimate, $\widehat{\bf\beta}_\theta$, of the fixed effects.
+The values of $\bf u$ and $\bf\beta$ that provide this minimum are called, respectively, the *conditional mode*, $\tilde{\bf u}$, of the spherical random effects and the conditional estimate, $\widehat{\bf\beta}_\theta$, of the fixed effects.
 At the conditional estimate of the fixed effects the objective is
 ```math
 d({\bf\theta},\widehat{\beta}_\theta,\sigma|{\bf y})
