@@ -66,7 +66,7 @@ The values of $\bf u$ and $\bf\beta$ that provide this minimum are called, respe
 At the conditional estimate of the fixed effects the objective is
 
 $d({\bf\theta},\widehat{\beta_\theta},\sigma|{\bf y})
-=n\log(2\pi\sigma^2)+\log(|{\bf L}(\theta)|^2)+\frac{r^2_\theta}{\sigma^2}.$
+=n\log(2\pi\sigma^2) + \log(|{\bf L_\theta}|^2) + \frac{r^2_\theta}{\sigma^2}.$
 
 Minimizing this expression with respect to $\sigma^2$ produces the conditional estimate
 
