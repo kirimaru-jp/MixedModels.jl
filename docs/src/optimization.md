@@ -83,12 +83,12 @@ The MLE of $\bf\theta$, written $\widehat{\bf\theta}$, is the value that minimiz
 We determine this value by numerical optimization.
 In the process of evaluating $\tilde{d}(\widehat{\theta}|{\bf y})$ 
 we determine $\widehat{\beta}=\widehat{\beta_{\widehat\theta}}$, 
-$\tilde{\bf u_{\widehat{\theta}}}$ and $r^2_{\widehat{\theta}}$, 
+$\tilde{\bf u}_{\widehat{\theta}}$ and $r^2_{\widehat{\theta}}$, 
 from which we can evaluate $\widehat{\sigma}=\sqrt{r^2_{\widehat{\theta}}/n}$.
 
 The elements of the conditional mode of $\mathcal B$, evaluated at the parameter estimates,
 
-$\tilde{\bf b_{\widehat{\theta}}} = \Lambda_{\widehat{\theta}} \tilde{\bf u}_{\widehat{\theta}}$
+$\tilde{\bf b}_{\widehat{\theta}} = \Lambda_{\widehat{\theta}} \tilde{\bf u}_{\widehat{\theta}}$
 
 are sometimes called the *best linear unbiased predictors* or BLUPs of the random effects.
 Although BLUPs an appealing acronym, I don’t find the term particularly instructive (what is a “linear unbiased predictor” and in what sense are these the “best”?) and prefer the term “conditional modes”, because these are the values of $\bf b$ that maximize the density of the conditional distribution $\mathcal{B} | \mathcal{Y} = {\bf y}$.
