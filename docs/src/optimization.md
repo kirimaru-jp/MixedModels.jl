@@ -83,7 +83,6 @@ The MLE of $\bf\theta$, written $\widehat{\bf\theta}$, is the value that minimiz
 We determine this value by numerical optimization.
 In the process of evaluating $\tilde{d}(\widehat{\theta}|{\bf y})$ 
 we determine $\widehat{\beta}=\widehat{\beta_{\widehat\theta}}$, 
-
 $\tilde{\bf u}_{\widehat{\theta}}$ 
 
 and $r^2_{\widehat{\theta}}$, 
