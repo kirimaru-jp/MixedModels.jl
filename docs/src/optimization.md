@@ -50,7 +50,7 @@ where ${\bf I}_q$ is the $q\times q$ *identity matrix*.
 
 Negative twice the log-likelihood of the parameters, given the data, $\bf y$, is
 
-$d({\bf\theta},{\bf\beta},\sigma|{\bf y})$
+$d({\bf\theta},{\bf\beta},\sigma|{\bf y}) = n\log(2\pi\sigma^2)+\log(|\bf{L}(\theta)|^2)+\frac{r^2_{\beta,\theta}}{\sigma^2}.$
 
 where $|{\bf L}_\theta|$ denotes the *determinant* of ${\bf L}_\theta$.
 Because ${\bf L}_\theta$ is triangular, its determinant is the product of its diagonal elements.
