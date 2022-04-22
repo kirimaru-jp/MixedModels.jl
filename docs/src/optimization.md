@@ -26,7 +26,7 @@ Although the matrix $\bf Z$ can be large (i.e. both $n$ and $q$ can be large), i
 
 The *relative covariance factor*, $\Lambda_\theta$, is a $q\times q$ lower-triangular matrix, depending on the *variance-component parameter*, $\bf\theta$, and generating the symmetric $q\times q$ variance-covariance matrix, $\Sigma_\theta$, as
 
-\Sigma_\theta=\sigma^2\Lambda_\theta\Lambda_\theta'
+$\Sigma_\theta=\sigma^2\Lambda_\theta\Lambda_\theta'$
 
 The *spherical random effects*, $\mathcal{U}\sim\mathcal{N}(\bf{0},\sigma^2\bf{I}_q)$, determine $\mathcal B$ according to
 ```math
