@@ -64,14 +64,14 @@ $r^2_\theta =\min_{{\bf\beta},{\bf u}}\left(\|{\bf y} -{\bf X}{\bf\beta} -{\bf Z
 is also a direct calculation.
 The values of $\bf u$ and $\bf\beta$ that provide this minimum are called, respectively, the *conditional mode*, $\tilde{\bf u_\theta}$, of the spherical random effects and the conditional estimate, $\widehat{\bf\beta_\theta}$, of the fixed effects.
 At the conditional estimate of the fixed effects the objective is
-```math
-d({\bf\theta},\widehat{\beta}_\theta,\sigma|{\bf y})
-=n\log(2\pi\sigma^2)+\log(|{\bf L}_\theta|^2)+\frac{r^2_\theta}{\sigma^2}.
-```
+
+$d({\bf\theta},\widehat{\beta}_\theta,\sigma|{\bf y})
+=n\log(2\pi\sigma^2)+\log(|{\bf L}_\theta|^2)+\frac{r^2_\theta}{\sigma^2}.$
+
 Minimizing this expression with respect to $\sigma^2$ produces the conditional estimate
-```math
-\widehat{\sigma^2}_\theta=\frac{r^2_\theta}{n}
-```
+
+$\widehat{\sigma^2}_\theta=\frac{r^2_\theta}{n}$
+
 which provides the *profiled log-likelihood* on the deviance scale as
 ```math
 \tilde{d}(\theta|{\bf y})=d(\theta,\widehat{\beta}_\theta,\widehat{\sigma}_\theta|{\bf y})
