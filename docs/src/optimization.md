@@ -70,7 +70,7 @@ $d({\bf\theta},\widehat{\bf\beta_\theta},\sigma|{\bf y})
 
 Minimizing this expression with respect to $\sigma^2$ produces the conditional estimate
 
-$\widehat{\sigma^2_\theta}=\frac{r^2_\theta}{n}$
+$\widehat{\sigma}^2_\theta = \frac{r^2_\theta}{n}$
 
 which provides the *profiled log-likelihood* on the deviance scale as
 ```math
