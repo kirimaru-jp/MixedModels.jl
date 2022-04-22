@@ -44,7 +44,7 @@ $r^2_{\beta,\theta} =\min_{\bf{u}}\left(\|\bf{y} -\bf{X}{\beta} -\bf{Z}\Lambda_\
 is a direct (i.e. non-iterative) computation.
 The particular method used to solve this generates a *blocked Choleksy factor*, $\bf{L}_\theta$ (or $\bf{L}(\theta)$), which is an lower triangular $q\times q$ matrix satisfying
 
-$\bf{L}_\theta {\bf L(\theta)^\prime} = \Lambda(\theta)'\bf{Z}'\bf{Z}\Lambda(\theta) + \bf{I}_q.$
+$\bf{L}_\theta {\bf L(\theta)^\prime} = \Lambda(\theta)'\bf{Z}'\bf{Z}\Lambda(\theta) + \bf{I}_q$
 
 where ${\bf I}_q$ is the $q\times q$ *identity matrix*.
 
@@ -66,7 +66,7 @@ The values of $\bf u$ and $\bf\beta$ that provide this minimum are called, respe
 At the conditional estimate of the fixed effects the objective is
 
 $d({\bf\theta},\widehat{\beta_\theta},\sigma|{\bf y})
-=n\log(2\pi\sigma^2) + \log(|{\bf L_\theta}|^2) + \frac{r^2_\theta}{\sigma^2}.$
+=n\log(2\pi\sigma^2) + \log(|{\bf L_\theta}|^2) + \frac{r^2_\theta}{\sigma^2}$.
 
 Minimizing this expression with respect to $\sigma^2$ produces the conditional estimate
 
@@ -75,7 +75,7 @@ $\widehat{\sigma}^2_\theta = \frac{r^2_\theta}{n}$
 which provides the *profiled log-likelihood* on the deviance scale as
 
 $\tilde{d}(\theta|{\bf y})=d(\theta,\widehat{\beta_\theta},\widehat{\sigma_\theta}|{\bf y})
-=\log(|{\bf L_\theta}|^2)+n\left[1+\log\left(\frac{2\pi r^2_\theta}{n}\right)\right],$
+=\log(|{\bf L_\theta}|^2)+n\left[1+\log\left(\frac{2\pi r^2_\theta}{n}\right)\right]$,
 
 a function of $\bf\theta$ alone.
 
